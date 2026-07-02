@@ -1,0 +1,16 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SalarySlipManagementApi.DTOs.SalarySlipDTOs
+{
+    public class GenerateSalarySlipDto
+    {
+        [Required]
+        public Guid EmployeeGlobalId { get; set; }
+
+        [Required, Range(1, 12)]
+        public int Month { get; set; }
+
+        [Required, Range(2000, 2100)]
+        public int Year { get; set; }
+    }
+}

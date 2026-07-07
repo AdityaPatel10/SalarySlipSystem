@@ -71,9 +71,17 @@ namespace SalarySlipManagementApi.Controllers
             {
                 month = s.Month,
                 year = s.Year,
-                grossPay = s.GrossSalary,
-                totalDeductions = s.TotalDeduction,
-                netPay = s.NetSalary,
+
+                basicSalary = s.BasicSalary,
+                hra = s.HRA,
+                otherAllowances = s.OtherAllowances,
+
+                pfDeduction = s.PFDeduction,
+                taxDeduction = s.TaxDeduction,
+
+                grossSalary = s.GrossSalary,
+                totalDeduction = s.TotalDeduction,
+                netSalary = s.NetSalary,
             });
 
             return Ok(response);

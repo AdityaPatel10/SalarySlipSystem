@@ -73,7 +73,63 @@ namespace SalarySlipManagementApi.Services
                 Token = tokenString,
                 Message = "Login successful",
                 UserRole = roleName,
+                GlobalId = employee.GlobalId,
             };
+        }
+
+        public async Task<string> RequestOtpAsync(RequestOtpDto request)
+        {
+            var employees = await _unitOfWork.Employees.FindAsync(e =>
+                e.Email == request.EmailOrPhone || e.PhoneNumber == request.EmailOrPhone
+            );
+            var employee = employees.FirstOrDefault();
+
+            if (employee == null)
+                return "User not found";
+
+            string otp = new Random().Next(100000, 999999).ToString();
+
+            employee.RestOtp = otp;
+            employee.OtpEpiry = DateTime.UtcNow.AddMinutes(5);
+
+            _unitOfWork.Employees.Update(employee);
+            await _unitOfWork.CompleteAsync();
+            return otp;
+        }
+
+        public async Task<bool> VerifyOtpAsync(VerifyOtpDto request)
+        {
+            var employees = await _unitOfWork.Employees.FindAsync(e =>
+                e.Email == request.EmailOrPhone || e.PhoneNumber == request.EmailOrPhone
+            );
+            var employee = employees.FirstOrDefault();
+
+            if (employee == null || employee.RestOtp != request.OtpCode)
+                return false;
+
+            if (employee.OtpEpiry < DateTime.UtcNow)
+                return false;
+
+            return true;
+        }
+
+        public async Task<bool> ResetPasswordAsnyc(ResetPasswordDto request)
+        {
+            var employees = await _unitOfWork.Employees.FindAsync(e =>
+                e.Email == request.EmailorPhone || e.PhoneNumber == request.EmailorPhone
+            );
+            var employee = employees.FirstOrDefault();
+
+            if (employee == null)
+                return false;
+
+            employee.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+            employee.RestOtp = null;
+            employee.OtpEpiry = null;
+
+            _unitOfWork.Employees.Update(employee);
+            await _unitOfWork.CompleteAsync();
+            return true;
         }
     }
 }

@@ -26,6 +26,54 @@
     ]
   },
   {
+    "ContainingType": "SalarySlipManagementApi.Controllers.AuthController",
+    "Method": "RequestOtp",
+    "RelativePath": "api/Auth/request-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SalarySlipManagementApi.DTOs.AuthDTOs.RequestOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SalarySlipManagementApi.Controllers.AuthController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Auth/reset-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SalarySlipManagementApi.DTOs.AuthDTOs.ResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SalarySlipManagementApi.Controllers.AuthController",
+    "Method": "VerifyOtp",
+    "RelativePath": "api/Auth/verify-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SalarySlipManagementApi.DTOs.AuthDTOs.VerifyOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SalarySlipManagementApi.Controllers.DepartmentsController",
     "Method": "CreateNewDepartment",
     "RelativePath": "api/Departments/CreateNewDepartment",

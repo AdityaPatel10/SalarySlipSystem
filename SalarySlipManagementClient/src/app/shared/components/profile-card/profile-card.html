@@ -1,0 +1,24 @@
+<div
+  class="bg-[#15151c] p-6 rounded-xl border border-white/10 shadow-2xl relative overflow-hidden"
+  *ngIf="employeeData"
+>
+  <h2 class="text-xl font-bold text-white mb-6">Profile Details</h2>
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <p class="text-gray-400 text-sm mb-1">Full Name</p>
+      <p class="text-white font-medium">{{ employeeData.name }}</p>
+    </div>
+    <div>
+      <p class="text-gray-400 text-sm mb-1">Email Address</p>
+      <p class="text-white font-medium">{{ employeeData.email }}</p>
+    </div>
+    <div>
+      <p class="text-gray-400 text-sm mb-1">Department</p>
+      <p class="text-white font-medium">{{ employeeData.departmentName }}</p>
+    </div>
+    <div>
+      <p class="text-gray-400 text-sm mb-1">Role</p>
+      <p class="text-blue-400 font-medium">{{ employeeData.roleName }}</p>
+    </div>
+  </div>
+</div>

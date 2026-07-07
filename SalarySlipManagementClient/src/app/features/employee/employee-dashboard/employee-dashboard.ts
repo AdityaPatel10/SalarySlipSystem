@@ -1,0 +1,95 @@
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Employee } from '../../../core/services/employee';
+import { SalarySlip } from '../../../core/services/salary-slip';
+import { Router } from '@angular/router';
+import { PdfGenerator } from '../../../core/services/pdf-generator';
+import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
+
+@Component({
+  selector: 'app-employee-dashboard',
+  imports: [CommonModule, ProfileCard],
+  templateUrl: './employee-dashboard.html',
+  styleUrl: './employee-dashboard.css',
+})
+export class EmployeeDashboard implements OnInit {
+  globalId: string | null = null;
+  employeeData: any = null;
+
+  months = [
+    { value: 1, name: 'January' },
+    { value: 2, name: 'February' },
+    { value: 3, name: 'March' },
+    { value: 4, name: 'April' },
+    { value: 5, name: 'May' },
+    { value: 6, name: 'June' },
+    { value: 7, name: 'July' },
+    { value: 8, name: 'August' },
+    { value: 9, name: 'September' },
+    { value: 10, name: 'October' },
+    { value: 11, name: 'November' },
+    { value: 12, name: 'December' },
+  ];
+
+  slipHistory: any[] = [];
+  isLoadingHistory = true;
+
+  constructor(
+    private employeeService: Employee,
+    private slipService: SalarySlip,
+    private router: Router,
+    private pdfService: PdfGenerator,
+    private cdr: ChangeDetectorRef,
+  ) {}
+
+  ngOnInit(): void {
+    if (typeof window !== 'undefined') {
+      this.globalId = localStorage.getItem('global_id');
+
+      if (!this.globalId) {
+        this.logout();
+        return;
+      }
+
+      this.loadEmployeeData();
+      this.loadSlipHistory();
+    }
+  }
+
+  loadEmployeeData() {
+    this.employeeService.getEmployeeById(this.globalId!).subscribe({
+      next: (res) => {
+        this.employeeData = res;
+        this.cdr.markForCheck();
+      },
+      error: () => this.logout(),
+    });
+  }
+
+  loadSlipHistory() {
+    this.isLoadingHistory = true;
+
+    this.slipService.getEmployeeHistory(this.globalId!).subscribe({
+      next: (data) => {
+        this.slipHistory = data;
+        this.isLoadingHistory = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.isLoadingHistory = false;
+        this.cdr.markForCheck();
+      },
+    });
+  }
+
+  logout() {
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+    }
+    this.router.navigate(['/']);
+  }
+
+  downloadPdf(slip: any) {
+    this.pdfService.generatePaySlip(slip, this.employeeData);
+  }
+}

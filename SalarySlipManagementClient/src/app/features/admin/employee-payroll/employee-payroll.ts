@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Employee } from '../../../core/services/employee';
 import { SalarySlip } from '../../../core/services/salary-slip';
 import { SalaryStructure } from '../../../core/services/salary-structure';
 import { CommonModule } from '@angular/common';
+import { PdfGenerator } from '../../../core/services/pdf-generator';
 
 @Component({
   selector: 'app-employee-payroll',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './employee-payroll.html',
   styleUrl: './employee-payroll.css',
 })
@@ -47,6 +48,8 @@ export class EmployeePayroll implements OnInit {
     private structureService: SalaryStructure,
     private slipService: SalarySlip,
     private employeeService: Employee,
+    private pdfService: PdfGenerator,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +76,7 @@ export class EmployeePayroll implements OnInit {
   loadEmployeeData() {
     this.employeeService.getEmployeeById(this.employeeGlobalId).subscribe((res) => {
       this.employeeData = res;
+      this.cdr.detectChanges();
     });
   }
 
@@ -89,6 +93,7 @@ export class EmployeePayroll implements OnInit {
           pfDeductionPercentage: struct.pfDeductionPercentage,
           taxDeductionPercentage: struct.taxDeductionPercentage,
         });
+        this.cdr.detectChanges();
       }
     });
   }
@@ -100,6 +105,7 @@ export class EmployeePayroll implements OnInit {
       next: (data) => {
         this.slipHistory = data;
         this.isLoadingHistory = false;
+        this.cdr.detectChanges();
       },
       error: () => (this.isLoadingHistory = false),
     });
@@ -129,6 +135,7 @@ export class EmployeePayroll implements OnInit {
           this.hasStructure = true;
           this.currentStructureId = res.globalId;
           this.isSavingStructure = false;
+          this.cdr.detectChanges();
         },
         error: () => (this.isSavingStructure = false),
       });
@@ -150,11 +157,16 @@ export class EmployeePayroll implements OnInit {
         alert('PaySlip generated successfully.');
         this.isGenerating = false;
         this.loadSlipHistory();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         alert('Failed' + (err.error || 'Unknown Error'));
         this.isGenerating = false;
       },
     });
+  }
+
+  downloadPdf(slip: any) {
+    this.pdfService.generatePaySlip(slip, this.employeeData);
   }
 }

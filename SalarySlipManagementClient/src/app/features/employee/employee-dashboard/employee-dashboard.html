@@ -1,0 +1,98 @@
+<div class="min-h-screen bg-[#0a0a0f] p-8">
+  <div *ngIf="employeeData" class="max-w-6xl mx-auto space-y-8">
+    <!-- Header Area -->
+
+    <div
+      class="flex justify-between items-center bg-[#15151c] p-6 rounded-2xl border border-white/5 shadow-lg"
+    >
+      <div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">Employee Portal</h1>
+        <p class="text-gray-400 mt-1">
+          Welcome back, <span class="text-blue-400 font-medium">{{ employeeData?.name }}</span
+          >!
+        </p>
+      </div>
+
+      <button
+        (click)="logout()"
+        class="px-5 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 font-medium rounded-lg border border-red-500/20 transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.2)]"
+      >
+        Logout
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Left Column: Profile Card -->
+
+      <div class="lg:col-span-1">
+        <!-- Reusing our amazing shared component! -->
+
+        <app-profile-card [employeeData]="employeeData"></app-profile-card>
+      </div>
+      <!-- Right Column: Payslip History -->
+
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-[#15151c] p-6 rounded-2xl border border-white/5 shadow-lg">
+          <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span>
+            My Payslips
+          </h2>
+          <!-- Loading State -->
+
+          <div *ngIf="isLoadingHistory" class="flex justify-center items-center py-12">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          </div>
+
+          <!-- Empty State -->
+
+          <div
+            *ngIf="!isLoadingHistory && slipHistory.length === 0"
+            class="text-center py-12 bg-white/5 rounded-xl border border-dashed border-white/10"
+          >
+            <p class="text-gray-400">No payslips have been generated for you yet.</p>
+          </div>
+
+          <!-- History Table -->
+
+          <div *ngIf="!isLoadingHistory && slipHistory.length > 0" class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-white/10 text-gray-400 text-sm tracking-wider uppercase">
+                  <th class="p-4 font-medium">Period</th>
+                  <th class="p-4 font-medium">Gross Pay</th>
+                  <th class="p-4 font-medium">Deductions</th>
+                  <th class="p-4 font-medium">Net Pay</th>
+                  <th class="p-4 font-medium text-right">Action</th>
+                </tr>
+              </thead>
+
+              <tbody class="divide-y divide-white/5 text-gray-300">
+                <tr
+                  *ngFor="let slip of slipHistory"
+                  class="hover:bg-white/[0.02] transition-colors group"
+                >
+                  <td class="p-4 font-medium text-white">
+                    {{ months[slip.month - 1].name }} {{ slip.year }}
+                  </td>
+                  <td class="p-4 text-green-400">${{ slip.grossPay ?? slip.grossSalary }}</td>
+                  <td class="p-4 text-red-400">
+                    ${{ slip.totalDeductions ?? slip.totalDeduction }}
+                  </td>
+                  <td class="p-4 text-blue-400 font-bold">${{ slip.netPay ?? slip.netSalary }}</td>
+                  <td class="p-4 text-right">
+                    <button
+                      (click)="downloadPdf(slip)"
+                      class="px-4 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium rounded-lg border border-blue-500/20 transition-all"
+                    >
+                      Download PDF
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

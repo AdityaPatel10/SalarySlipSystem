@@ -42,8 +42,14 @@ export class Login {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         localStorage.setItem('jwt_token', response.token);
+        localStorage.setItem('user_role', response.role);
+        localStorage.setItem('global_id', response.globalId);
 
-        this.router.navigate(['/dashboard']);
+        if (response.role === 'Admin') {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.router.navigate(['/employee']);
+        }
       },
       error: (err) => {
         this.isLoading = false;

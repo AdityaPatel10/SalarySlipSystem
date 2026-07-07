@@ -6,13 +6,15 @@ import { Dashboard } from './features/admin/dashboard/dashboard';
 import { HireEmployee } from './features/admin/hire-employee/hire-employee';
 import { MasterData } from './features/admin/master-data/master-data';
 import { EmployeePayroll } from './features/admin/employee-payroll/employee-payroll';
+import { EmployeeDashboard } from './features/employee/employee-dashboard/employee-dashboard';
+import { adminGuard } from './core/guards/admin-guard';
 
 export const routes: Routes = [
   { path: '', component: Login },
   {
     path: 'dashboard',
     component: AdminLayout,
-    canActivate: [authGuard],
+    canActivate: [authGuard, adminGuard],
     children: [
       { path: '', component: Dashboard },
       { path: 'hire', component: HireEmployee },
@@ -20,5 +22,12 @@ export const routes: Routes = [
       { path: 'payroll/:id', component: EmployeePayroll },
     ],
   },
+
+  {
+    path: 'employee',
+    component: EmployeeDashboard,
+    canActivate: [authGuard],
+  },
+
   { path: '**', redirectTo: '' },
 ];

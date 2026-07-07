@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\adity\\Desktop\\Projects\\CSharp\\SalarySlipManagementApi\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj": {}
+    "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\adity\\Desktop\\Projects\\CSharp\\SalarySlipManagementApi\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj": {
+    "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adity\\Desktop\\Projects\\CSharp\\SalarySlipManagementApi\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj",
+        "projectUniqueName": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj",
         "projectName": "SalarySlipManagementApi",
-        "projectPath": "C:\\Users\\adity\\Desktop\\Projects\\CSharp\\SalarySlipManagementApi\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj",
+        "projectPath": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\SalarySlipManagementApi.csproj",
         "packagesPath": "C:\\Users\\adity\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adity\\Desktop\\Projects\\CSharp\\SalarySlipManagementApi\\SalarySlipManagementApi\\obj\\",
+        "outputPath": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -56,6 +56,14 @@
               "target": "Package",
               "version": "[16.1.1, )"
             },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[10.0.9, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.9, )"
@@ -75,10 +83,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[10.0.9, )"
-            },
-            "Microsoft.OpenApi": {
-              "target": "Package",
-              "version": "[2.7.5, )"
             }
           },
           "imports": [

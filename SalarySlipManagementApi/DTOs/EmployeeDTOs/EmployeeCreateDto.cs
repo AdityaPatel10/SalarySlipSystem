@@ -24,9 +24,9 @@ namespace SalarySlipManagementApi.DTOs.EmployeeDTOs
         public DateTime DateOfJoining { get; set; }
 
         [Required]
-        public int RoleId { get; set; }
+        public Guid RoleGlobalId { get; set; }
 
         [Required]
-        public int DepartmentId { get; set; }
+        public Guid DepartmentGlobalId { get; set; }
     }
 }

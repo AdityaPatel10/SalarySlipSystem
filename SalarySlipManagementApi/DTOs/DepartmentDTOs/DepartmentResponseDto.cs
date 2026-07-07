@@ -1,4 +1,4 @@
-﻿namespace SalarySlipManagementApi.DTOs.DepartmentDTOs
+namespace SalarySlipManagementApi.DTOs.DepartmentDTOs
 {
     public class DepartmentResponseDto
     {

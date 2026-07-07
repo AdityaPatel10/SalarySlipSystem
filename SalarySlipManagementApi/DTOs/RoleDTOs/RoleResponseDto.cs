@@ -1,4 +1,4 @@
-﻿namespace SalarySlipManagementApi.DTOs.RoleDTOs
+namespace SalarySlipManagementApi.DTOs.RoleDTOs
 {
     public class RoleResponseDto
     {

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalarySlipManagementApi.DTOs.SalarySlipDTOs;
 using SalarySlipManagementApi.Repositories;
@@ -8,6 +10,7 @@ namespace SalarySlipManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MonthlySalarySlipsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,6 +26,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpPost("GenerateSalarySlip")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<SalarySlipResponseDto>> GenerateSalarySlip(
             [FromBody] GenerateSalarySlipDto request
         )
@@ -39,8 +43,16 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpGet("GetEmployeeHistory/{employeeGlobalId}")]
+        [Authorize]
         public async Task<ActionResult> GetEmployeeHistory(Guid employeeGlobalId)
         {
+            var loggedInUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var loggedInUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (loggedInUserRole != "Admin" && loggedInUserId != employeeGlobalId.ToString())
+            {
+                return Forbid();
+            }
+
             var employees = await _unitOfWork.Employees.FindAsync(e =>
                 e.GlobalId == employeeGlobalId
             );
@@ -55,7 +67,16 @@ namespace SalarySlipManagementApi.Controllers
                 s.EmployeeId == employee.Id
             );
 
-            return Ok(slips);
+            var response = slips.Select(s => new
+            {
+                month = s.Month,
+                year = s.Year,
+                grossPay = s.GrossSalary,
+                totalDeductions = s.TotalDeduction,
+                netPay = s.NetSalary,
+            });
+
+            return Ok(response);
         }
     }
 }

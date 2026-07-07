@@ -15,5 +15,8 @@
         // in Phase 2 we will populate these string names using EF Core!
         public string DepartmentName { get; set; } = string.Empty;
         public string RoleName { get; set; } = string.Empty;
+        public Guid DepartmentGlobalId { get; set; }
+        public Guid RoleGlobalId { get; set; }
+
     }
 }

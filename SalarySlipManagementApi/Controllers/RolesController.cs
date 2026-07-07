@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalarySlipManagementApi.Data;
 using SalarySlipManagementApi.DTOs.RoleDTOs;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalarySlipManagementApi.DTOs.SalaryStructureDTOs;
 using SalarySlipManagementApi.Entities;
@@ -8,6 +9,7 @@ namespace SalarySlipManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class SalaryStructuresController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;

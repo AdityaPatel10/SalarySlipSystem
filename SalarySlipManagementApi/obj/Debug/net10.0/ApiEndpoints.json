@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "SalarySlipManagementApi.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SalarySlipManagementApi.DTOs.AuthDTOs.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SalarySlipManagementApi.DTOs.AuthDTOs.AuthResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "SalarySlipManagementApi.Controllers.DepartmentsController",
     "Method": "CreateNewDepartment",
     "RelativePath": "api/Departments/CreateNewDepartment",

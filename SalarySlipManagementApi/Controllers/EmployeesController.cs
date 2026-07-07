@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Data;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalarySlipManagementApi.DTOs.EmployeeDTOs;
 using SalarySlipManagementApi.Entities;
@@ -8,6 +11,7 @@ namespace SalarySlipManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeesController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -18,6 +22,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpGet("GetAllEmployees")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<EmployeeResponseDto>>> GetAllEmployees()
         {
             var employees = await _unitOfWork.Employees.GetAllAsync(
@@ -34,13 +39,24 @@ namespace SalarySlipManagementApi.Controllers
                 DateOfJoining = e.DateOfJoining,
                 DepartmentName = e.Department?.Name ?? "",
                 RoleName = e.Role?.Name ?? "",
+                DepartmentGlobalId = e.Department?.GlobalId ?? Guid.Empty,
+                RoleGlobalId = e.Role?.GlobalId ?? Guid.Empty,
             });
             return Ok(response);
         }
 
         [HttpGet("GetEmployeeById/{globalId}")]
+        [Authorize]
         public async Task<ActionResult<EmployeeResponseDto>> GetEmployeeById(Guid globalId)
         {
+            var loggedInUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var loggedInUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (loggedInUserId != globalId.ToString() && loggedInUserRole != "Admin")
+            {
+                return Forbid();
+            }
+
             var employees = await _unitOfWork.Employees.FindAsync(
                 e => e.GlobalId == globalId,
                 includeProperties: "Role,Department"
@@ -62,16 +78,29 @@ namespace SalarySlipManagementApi.Controllers
                 DateOfJoining = employee.DateOfJoining,
                 DepartmentName = employee.Department?.Name ?? "",
                 RoleName = employee.Role?.Name ?? "",
+                DepartmentGlobalId = employee.Department?.GlobalId ?? Guid.Empty,
+                RoleGlobalId = employee.Role?.GlobalId ?? Guid.Empty,
             };
 
             return Ok(response);
         }
 
         [HttpPost("CreateNewEmployee")]
-        public async Task<ActionResult> CreateNewEmployee(
-            [FromBody] EmployeeCreateDto dto
-        )
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> CreateNewEmployee([FromBody] EmployeeCreateDto dto)
         {
+            var departments = await _unitOfWork.Departments.FindAsync(d =>
+                d.GlobalId == dto.DepartmentGlobalId
+            );
+            var department = departments.FirstOrDefault();
+            if (department == null)
+                return BadRequest("Invalid Department: Could not find it in the DB.");
+
+            var roles = await _unitOfWork.Roles.FindAsync(r => r.GlobalId == dto.RoleGlobalId);
+            var role = roles.FirstOrDefault();
+            if (role == null)
+                return BadRequest("Invalid Role: Could not find it in the DB.");
+
             var newEmployee = new Employee
             {
                 Name = dto.Name,
@@ -79,29 +108,34 @@ namespace SalarySlipManagementApi.Controllers
                 PhoneNumber = dto.PhoneNumber,
                 DateOfJoining = dto.DateOfJoining,
                 BankAccountNumber = dto.BankAccountNumber,
-                RoleId = dto.RoleId,
-                DepartmentId = dto.DepartmentId,
-                PasswordHash = dto.Password, // We will hash this later!
+                RoleId = role.Id,
+                DepartmentId = department.Id,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password), // We will hash this later!
             };
 
             await _unitOfWork.Employees.AddAsync(newEmployee);
             await _unitOfWork.CompleteAsync();
 
             return Ok(
-                new
-                {
-                    Message = "Employee created successfully!",
-                    GlobalId = newEmployee.GlobalId,
-                }
+                new { Message = "Employee created successfully!", GlobalId = newEmployee.GlobalId }
             );
         }
 
         [HttpPut("UpdateEmployee/{globalId}")]
+        [Authorize]
         public async Task<IActionResult> UpdateEmployee(
             Guid globalId,
             [FromBody] EmployeeUpdateDto dto
         )
         {
+            var loggedInUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var loggedInUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (loggedInUserId != globalId.ToString() && loggedInUserRole != "Admin")
+            {
+                return Forbid();
+            }
+
             var employees = await _unitOfWork.Employees.FindAsync(e => e.GlobalId == globalId);
             var employee = employees.FirstOrDefault();
 
@@ -110,12 +144,24 @@ namespace SalarySlipManagementApi.Controllers
                 return BadRequest("Employee Not Found");
             }
 
+            var departments = await _unitOfWork.Departments.FindAsync(d =>
+                d.GlobalId == dto.DepartmentGlobalId
+            );
+            var department = departments.FirstOrDefault();
+            if (department == null)
+                return BadRequest("Invalid Department");
+
+            var roles = await _unitOfWork.Roles.FindAsync(r => r.GlobalId == dto.RoleGlobalId);
+            var role = roles.FirstOrDefault();
+            if (role == null)
+                return BadRequest("Invalid Role");
+
             employee.Name = dto.Name;
             employee.Email = dto.Email;
             employee.PhoneNumber = dto.PhoneNumber;
             employee.BankAccountNumber = dto.BankAccountNumber;
-            employee.RoleId = dto.RoleId;
-            employee.DepartmentId = dto.DepartmentId;
+            employee.DepartmentId = department.Id;
+            employee.RoleId = role.Id;
 
             _unitOfWork.Employees.Update(employee);
             await _unitOfWork.CompleteAsync();
@@ -124,6 +170,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpDelete("DeleteEmployee/{globalId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEmployee(Guid globalId)
         {
             var employees = await _unitOfWork.Employees.FindAsync(e => e.GlobalId == globalId);

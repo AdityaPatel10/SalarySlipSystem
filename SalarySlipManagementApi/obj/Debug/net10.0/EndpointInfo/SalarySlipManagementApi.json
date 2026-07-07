@@ -13,6 +13,55 @@
     }
   ],
   "paths": {
+    "/api/Auth/Login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Departments/GetAllDepartments": {
       "get": {
         "tags": [
@@ -792,6 +841,20 @@
   },
   "components": {
     "schemas": {
+      "AuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "userRole": {
+            "type": "string"
+          }
+        }
+      },
       "DepartmentCreateDto": {
         "required": [
           "departmentName"
@@ -834,8 +897,8 @@
           "name",
           "email",
           "password",
-          "roleId",
-          "departmentId"
+          "roleGlobalId",
+          "departmentGlobalId"
         ],
         "type": "object",
         "properties": {
@@ -861,21 +924,13 @@
             "type": "string",
             "format": "date-time"
           },
-          "roleId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
+          "roleGlobalId": {
+            "type": "string",
+            "format": "uuid"
           },
-          "departmentId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
+          "departmentGlobalId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -907,13 +962,23 @@
           },
           "roleName": {
             "type": "string"
+          },
+          "departmentGlobalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roleGlobalId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
       "EmployeeUpdateDto": {
         "required": [
           "name",
-          "email"
+          "email",
+          "roleGlobalId",
+          "departmentGlobalId"
         ],
         "type": "object",
         "properties": {
@@ -930,21 +995,13 @@
           "bankAccountNumber": {
             "type": "string"
           },
-          "roleId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
+          "roleGlobalId": {
+            "type": "string",
+            "format": "uuid"
           },
-          "departmentId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
+          "departmentGlobalId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -979,6 +1036,21 @@
               "string"
             ],
             "format": "int32"
+          }
+        }
+      },
+      "LoginDto": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
           }
         }
       },
@@ -1251,6 +1323,9 @@
     }
   },
   "tags": [
+    {
+      "name": "Auth"
+    },
     {
       "name": "Departments"
     },

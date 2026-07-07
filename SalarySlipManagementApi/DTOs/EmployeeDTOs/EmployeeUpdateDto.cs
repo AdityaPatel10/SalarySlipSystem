@@ -13,7 +13,11 @@ namespace SalarySlipManagementApi.DTOs.EmployeeDTOs
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string BankAccountNumber { get; set; } = string.Empty;
-        public int RoleId { get; set; }
-        public int DepartmentId { get; set; }
+
+        [Required]
+        public Guid RoleGlobalId { get; set; }
+
+        [Required]
+        public Guid DepartmentGlobalId { get; set; }
     }
 }

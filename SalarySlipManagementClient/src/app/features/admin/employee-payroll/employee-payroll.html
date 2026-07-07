@@ -1,0 +1,187 @@
+<div class="space-y-6 max-w-7xl mx-auto pb-10">
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold text-white tracking-tight">Payroll Management</h1>
+      <p class="text-gray-400 mt-1" *ngIf="employeeData">
+        Managing finances for
+        <span class="text-white font-medium">{{ employeeData.name }}</span>
+        ({{ employeeData.roleName }})
+      </p>
+    </div>
+    <a
+      routerLink="/dashboard"
+      class="px-4 py-2 bg-[#2a2a36] hover:bg-[#3a3a4a] text-white font-medium rounded-xl transition-all cursor-pointer"
+    >
+      &larr; Back to Dashboard</a
+    >
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- LEFT COLUMN: Salary Structure -->
+    <div class="bg-[#15151c] border border-[#2a2a36] rounded-[1.5rem] p-6 shadow-xl">
+      <h3 class="text-xl font-bold text-white mb-4">Salary Structure</h3>
+      <p class="text-sm text-gray-400 mb-6">
+        Define the base pay and percentage breakdowns for allowances and deductions.
+      </p>
+
+      <form [formGroup]="structureForm" (ngSubmit)="saveStructure()" class="space-y-4">
+        <!-- Basic Salary -->
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1">Basic Salary (Annual)</label>
+
+          <div class="relative">
+            <span class="absolute left-4 top-2 text-gray-400">$</span>
+            <input
+              type="number"
+              formControlName="basicSalary"
+              class="w-full pl-8 pr-4 py-2 rounded-xl bg-[#0f0f15] border border-[#2a2a36] text-white focus:border-green-500 focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Allowances -->
+
+          <div class="space-y-4 p-4 border border-[#2a2a36] rounded-xl bg-[#0f0f15]/50">
+            <h4 class="text-green-400 font-medium text-sm">Allowances (Adds to Gross)</h4>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">HRA %</label>
+              <input
+                type="number"
+                formControlName="hraPercentage"
+                class="w-full px-3 py-1.5 rounded-lg bg-[#0f0f15] border border-[#2a2a36] text-white focus:border-green-500 focus:outline-none text-sm"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Other Allowances %</label>
+              <input
+                type="number"
+                formControlName="otherAllowancesPercentage"
+                class="w-full px-3 py-1.5 rounded-lg bg-[#0f0f15] border border-[#2a2a36] text-white focus:border-green-500 focus:outline-none text-sm"
+              />
+            </div>
+          </div>
+
+          <!-- Deductions -->
+          <div class="space-y-4 p-4 border border-[#2a2a36] rounded-xl bg-[#0f0f15]/50">
+            <h4 class="text-red-400 font-medium text-sm">Deductions (Subtracts)</h4>
+
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1"> PF % </label>
+              <input
+                type="number"
+                formControlName="pfDeductionPercentage"
+                class="w-full px-3 py-1.5 rounded-lg bg-[#0f0f15] border border-[#2a2a36] text-white focus:border-red-500 focus:outline-none text-sm"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1"> Tax % </label>
+              <input
+                type="number"
+                formControlName="taxDeductionPercentage"
+                class="w-full px-3 py-1.5 rounded-lg bg-[#0f0f15] border border-[#2a2a36] text-white focus:border-red-500 focus:outline-none text-sm"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="structureForm.invalid || isSavingStructure"
+          class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl mt-4 transition-all disabled:opacity-50"
+        >
+          {{ hasStructure ? 'Update Structure' : 'Save New Structure' }}
+        </button>
+      </form>
+    </div>
+
+    <!-- RIGHT COLUMN: Generate Slip -->
+
+    <div class="space-y-6">
+      <!-- Generate Card -->
+      <div
+        class="bg-[#15151c] border border-[#2a2a36] rounded-[1.5rem] p-6 shadow-xl relative overflow-hidden"
+      >
+        <div
+          class="absolute -right-10 -top-10 w-32 h-32 bg-green-500/10 rounded-full blur-3xl pointer-events-none"
+        ></div>
+        <h3 class="text-xl font-bold text-white mb-2">Generate Payslip</h3>
+        <p class="text-sm text-gray-400 mb-6">Runs the payroll engine for a specific month.</p>
+
+        <form [formGroup]="slipForm" (ngSubmit)="generateSlip()" class="flex items-end space-x-4">
+          <div class="flex-1">
+            <label class="block text-sm font-medium text-gray-400 mb-1">Month</label>
+            <select
+              formControlName="month"
+              class="w-full px-4 py-2 rounded-xl bg-[#0f0f15] border border-[#2a2a36] text-white focus:border-green-500 outline-none appearance-none"
+            >
+              <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+            </select>
+          </div>
+
+          <div class="flex-1">
+            <label class="block text-sm font-medium text-gray-400 mb-1">Year</label>
+            <input
+              type="number"
+              formControlName="year"
+              class="w-full px-4 py-2 rounded-xl bg-[#0f0f15] border border-[#2a2a36] text-white focus:border-green-500 outline-none"
+            />
+          </div>
+          <button
+            type="submit"
+            [disabled]="!hasStructure || slipForm.invalid || isGenerating"
+            class="px-6 py-2 h-[42px] bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-lg shadow-green-500/20"
+          >
+            Generate
+          </button>
+        </form>
+        <p *ngIf="!hasStructure" class="text-xs text-red-400 mt-3">
+          You must save a Salary Structure first.
+        </p>
+      </div>
+
+      <!-- History Card -->
+
+      <div class="bg-[#15151c] border border-[#2a2a36] rounded-[1.5rem] shadow-xl overflow-hidden">
+        <div class="p-5 border-b border-[#2a2a36]">
+          <h3 class="text-lg font-bold text-white">Payslip History</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0f0f15] text-gray-400 text-xs uppercase tracking-wider">
+                <th class="p-4">Period</th>
+                <th class="p-4">Gross</th>
+                <th class="p-4">Deductions</th>
+                <th class="p-4">Net Pay</th>
+                <th class="p-4"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#2a2a36] text-sm">
+              <tr *ngIf="!isLoadingHistory">
+                <td colspan="5" class="p-6 text-center text-gray-500">Loading history...</td>
+              </tr>
+              <tr *ngIf="!isLoadingHistory && slipHistory.length === 0">
+                <td colspan="5" class="p-6 text-center text-gray-500">
+                  No payslips generated yet.
+                </td>
+              </tr>
+              <tr *ngFor="let slip of slipHistory">
+                <td class="p-4 text-white font-medium">{{ slip.month }}/{{ slip.year }}</td>
+                <td class="p-4 text-green-400">${{ slip.grossPay }}</td>
+                <td class="p-4 text-red-400">${{ slip.totalDeductions }}</td>
+                <td class="p-4 text-white font-bold">${{ slip.netPay }}</td>
+                <td class="p-4 text-right">
+                  <button class="text-blue-500 hover:text-blue-400 font-medium">View PDF</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

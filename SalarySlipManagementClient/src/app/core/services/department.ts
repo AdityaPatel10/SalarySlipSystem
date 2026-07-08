@@ -19,7 +19,11 @@ export class Department {
   }
 
   updateDepartment(globalId: string, departmentName: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/UpdateDepartment/${globalId}`, { departmentName }, { responseType: 'text' });
+    return this.http.put(
+      `${this.apiUrl}/UpdateDepartment/${globalId}`,
+      { departmentName },
+      { responseType: 'text' },
+    );
   }
 
   deleteDepartment(globalId: string): Observable<any> {

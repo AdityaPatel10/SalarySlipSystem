@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SalarySlipManagementApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9335d9577df778dae6e8b5ac257f5efd637fc45a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8bdc980c20ddb552fc14eaf7c78881645aa59eff")]
 [assembly: System.Reflection.AssemblyProductAttribute("SalarySlipManagementApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SalarySlipManagementApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

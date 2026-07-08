@@ -4,6 +4,7 @@ import { Employee } from '../../../core/services/employee';
 import { Department } from '../../../core/services/department';
 import { EditEmployeeModal } from '../../../shared/components/edit-employee-modal/edit-employee-modal';
 import { RouterModule } from '@angular/router';
+import { SalarySlip } from '../../../core/services/salary-slip';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,22 +21,36 @@ export class Dashboard implements OnInit {
   };
 
   recentEmployees: any[] = [];
+  topFiveEmployees: any[] = [];
+
+  showAllResult = false;
   isLoading = true;
 
   isEditModalOpen = false;
   selectedEmployeeForEdit: any = null;
 
+  isViewModalOpen = false;
+  selectedEmployeeForView: any = null;
+
   constructor(
     private departmentService: Department,
     private employeeService: Employee,
-    private cdr: ChangeDetectorRef
+    private slipService: SalarySlip,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
     if (typeof window === 'undefined') return;
+
     this.employeeService.getAllEmployees().subscribe({
       next: (data) => {
-        this.recentEmployees = data;
+        this.recentEmployees = data.sort(
+          (a: any, b: any) =>
+            new Date(b.dateOfJoining).getTime() - new Date(a.dateOfJoining).getTime(),
+        );
+
+        this.topFiveEmployees = this.recentEmployees.slice(0, 5);
+
         this.stats.totalEmployees = data.length;
         this.isLoading = false;
         this.cdr.detectChanges();
@@ -45,12 +60,34 @@ export class Dashboard implements OnInit {
         this.isLoading = false;
       },
     });
+
     this.departmentService.getAllDepartments().subscribe({
       next: (data) => {
         this.stats.totalDepartments = data.length;
         this.cdr.detectChanges();
       },
     });
+
+    this.slipService.getTotalPayroll().subscribe({
+      next: (data) => {
+        this.stats.monthlyPayroll = `$${data.total}`;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Payroll API is returning error 404! Did you restart C#');
+        this.cdr.detectChanges();
+      },
+    });
+  }
+
+  openEditModal(emp: any) {
+    this.selectedEmployeeForEdit = emp;
+    this.isEditModalOpen = true;
+  }
+
+  openViewModal(emp: any) {
+    this.selectedEmployeeForView = emp;
+    this.isViewModalOpen = true;
   }
 
   fireEmployee(globalId: string) {
@@ -66,10 +103,5 @@ export class Dashboard implements OnInit {
         },
       });
     }
-  }
-
-  openEditModal(emp: any) {
-    this.selectedEmployeeForEdit = emp;
-    this.isEditModalOpen = true;
   }
 }

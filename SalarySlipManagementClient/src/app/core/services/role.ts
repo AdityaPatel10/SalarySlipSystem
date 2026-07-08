@@ -14,7 +14,15 @@ export class Role {
     return this.http.get<any[]>(`${this.apiUrl}/GetAllRoles`);
   }
 
-  createNewRole(name: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/CreateNewRole`, { name });
+  createNewRole(roleName: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/CreateNewRole`, { roleName });
+  }
+
+  updateRole(globalId: string, roleName: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/UpdateRole/${globalId}`, { roleName }, { responseType: 'text' });
+  }
+
+  deleteRole(globalId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/DeleteRole/${globalId}`, { responseType: 'text' });
   }
 }

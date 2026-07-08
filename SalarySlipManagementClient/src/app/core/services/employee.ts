@@ -10,13 +10,13 @@ export class Employee {
 
   constructor(private http: HttpClient) {}
 
-//These are the response request
+  //These are the response request
 
   createNewEmployee(rawData: any): Observable<any> {
     const formattedPayload = {
       ...rawData,
       departmentGlobalId: rawData.departmentId,
-      roleGlobalId: rawData.roleId
+      roleGlobalId: rawData.roleId,
     };
 
     return this.http.post<any>(`${this.apiUrl}/CreateNewEmployee`, formattedPayload);
@@ -34,7 +34,7 @@ export class Employee {
     const formattedPayload = {
       ...updatedData,
       departmentGlobalId: updatedData.departmentId,
-      roleGlobalId: updatedData.roleId
+      roleGlobalId: updatedData.roleId,
     };
 
     return this.http.put(`${this.apiUrl}/UpdateEmployee/${globalId}`, formattedPayload, {
@@ -46,5 +46,9 @@ export class Employee {
     return this.http.delete(`${this.apiUrl}/DeleteEmployee/${globalId}`, {
       responseType: 'text',
     });
+  }
+
+  updateSettings(data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/settings`, data);
   }
 }

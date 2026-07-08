@@ -14,7 +14,17 @@ export class Department {
     return this.http.get<any[]>(`${this.apiUrl}/GetAllDepartments`);
   }
 
-  createNewDepartment(name: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/CreateNewDepartment`, { name });
+  createNewDepartment(departmentName: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/CreateNewDepartment`, { departmentName });
+  }
+
+  updateDepartment(globalId: string, departmentName: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/UpdateDepartment/${globalId}`, { departmentName }, { responseType: 'text' });
+  }
+
+  deleteDepartment(globalId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/DeleteDepartment/${globalId}`, {
+      responseType: 'text',
+    });
   }
 }

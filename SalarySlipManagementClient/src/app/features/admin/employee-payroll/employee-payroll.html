@@ -161,7 +161,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-[#2a2a36] text-sm">
-              <tr *ngIf="!isLoadingHistory">
+              <tr *ngIf="isLoadingHistory">
                 <td colspan="5" class="p-6 text-center text-gray-500">Loading history...</td>
               </tr>
               <tr *ngIf="!isLoadingHistory && slipHistory.length === 0">

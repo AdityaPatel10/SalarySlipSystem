@@ -23,10 +23,17 @@
 
       <!-- Success Notification -->
       <div
-        *ngIf="departmentMessage"
+        *ngIf="departmentError"
         class="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-red-400 text-sm"
       >
-        {{ departmentMessage }}
+        {{ departmentError }}
+      </div>
+
+      <div
+        *ngIf="departmentSuccess"
+        class="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 text-sm"
+      >
+        {{ departmentSuccess }}
       </div>
 
       <!-- Add Department Form -->
@@ -51,12 +58,65 @@
         Existing Departments
       </h3>
       <div class="flex flex-wrap gap-2">
-        <span
+        <div
           *ngFor="let dept of departments"
-          class="px-4 py-2 rounded-lg bg-[#20202b] border border-[#2a2a36] text-gray-300 text-sm"
+          class="flex items-center justify-between px-4 py-3 rounded-lg bg-[#20202b] border border-[#2a2a36]"
         >
-          {{ dept.departmentName }}
-        </span>
+          <!-- View Mode -->
+          <span
+            *ngIf="editingDepartmentId !== dept.globalId"
+            class="px-4 py-2 rounded-lg bg-[#20202b] border border-[#2a2a36] text-gray-300 text-sm"
+          >
+            {{ dept.departmentName }}
+          </span>
+
+          <!-- Edit Mode -->
+
+          <input
+            *ngIf="editingDepartmentId === dept.globalId"
+            [value]="editingDepartmentName"
+            (input)="editingDepartmentName = $any($event.target).value"
+            class="px-3 py-1 rounded bg-[#0f0f15] border border-blue-500 text-white text-sm focus:outline-none"
+          />
+
+          <!-- Action Buttons -->
+
+          <div class="flex gap-3 ml-2">
+            <!-- Show Edit/Delete if not editing -->
+
+            <button
+              *ngIf="editingDepartmentId !== dept.globalId"
+              (click)="startEditDepartment(dept)"
+              class="text-blue-400 hover:text-blue-300 text-sm"
+            >
+              Edit
+            </button>
+            <button
+              *ngIf="editingDepartmentId !== dept.globalId"
+              (click)="deleteDepartment(dept.globalId)"
+              class="text-red-400 hover:text-red-300 text-sm"
+            >
+              Delete
+            </button>
+            <!-- Show Save/Cancel if currently editing -->
+
+            <button
+              *ngIf="editingDepartmentId === dept.globalId"
+              (click)="saveEditDepartment()"
+              class="text-green-400 hover:text-green-300 text-sm font-bold"
+            >
+              Save
+            </button>
+            <button
+              *ngIf="editingDepartmentId === dept.globalId"
+              (click)="editingDepartmentId = null"
+              class="text-gray-400 hover:text-gray-300 text-sm"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+
         <span *ngIf="departments.length === 0" class="text-gray-500 text-sm italic"
           >No departments found.</span
         >
@@ -86,10 +146,17 @@
 
       <!-- Success Notification -->
       <div
-        *ngIf="roleMessage"
+        *ngIf="roleSuccess"
         class="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 text-sm"
       >
-        {{ roleMessage }}
+        {{ roleSuccess }}
+      </div>
+
+      <div
+        *ngIf="roleError"
+        class="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm"
+      >
+        {{ roleError }}
       </div>
 
       <!-- Add Role Form -->
@@ -114,12 +181,57 @@
         Existing Roles
       </h3>
       <div class="flex flex-wrap gap-2">
-        <span
+        <div
           *ngFor="let role of roles"
-          class="px-4 py-2 rounded-lg bg-[#20202b] border border-[#2a2a36] text-gray-300 text-sm"
+          class="flex items-center justify-between px-4 py-3 rounded-lg bg-[#20202b] border border-[#2a2a36]"
         >
-          {{ role.roleName }}
-        </span>
+          <span
+            *ngIf="editingRoleId !== role.globalId"
+            class="px-4 py-2 rounded-lg bg-[#20202b] border border-[#2a2a36] text-gray-300 text-sm"
+          >
+            {{ role.roleName }}
+          </span>
+          <input
+            *ngIf="editingRoleId === role.globalId"
+            [value]="editingRoleName"
+            (input)="editingRoleName = $any($event.target).value"
+            class="px-3 py-1 rounded bg-[#0f0f15] border border-blue-500 text-white text-sm focus:outline-none"
+          />
+
+          <div class="flex gap-3 ml-2">
+            <button
+              *ngIf="editingRoleId !== role.globalId"
+              (click)="startEditRole(role)"
+              class="text-blue-400 hover:text-blue-300 text-sm"
+            >
+              Edit
+            </button>
+            <button
+              *ngIf="editingRoleId !== role.globalId"
+              (click)="deleteRole(role.globalId)"
+              class="text-red-400 hover:text-red-300 text-sm"
+            >
+              Delete
+            </button>
+            <!-- Show Save/Cancel if currently editing -->
+
+            <button
+              *ngIf="editingRoleId === role.globalId"
+              (click)="saveEditRole()"
+              class="text-green-400 hover:text-green-300 text-sm font-bold"
+            >
+              Save
+            </button>
+            <button
+              *ngIf="editingRoleId === role.globalId"
+              (click)="editingRoleId = null"
+              class="text-gray-400 hover:text-gray-300 text-sm"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+
         <span *ngIf="roles.length === 0" class="text-gray-500 text-sm italic">No roles found.</span>
       </div>
     </div>

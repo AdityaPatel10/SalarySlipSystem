@@ -31,8 +31,16 @@ export class EditEmployeeModal implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.departmentService.getAllDepartments().subscribe((d) => (this.departments = d));
-    this.roleService.getAllRoles().subscribe((r) => (this.roles = r));
+    this.departmentService.getAllDepartments().subscribe((d) => {
+      this.departments = d;
+      this.cdr.detectChanges();
+
+    });
+      
+    this.roleService.getAllRoles().subscribe((r) => {
+      this.roles = r; 
+      this.cdr.detectChanges();
+    });
 
     this.editForm = this.fb.group({
       name: [this.employeeData.name, Validators.required],

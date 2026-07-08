@@ -67,8 +67,13 @@
   <!-- Recent Employees Grid -->
   <div class="bg-[#15151c] border border-[#2a2a36] rounded-[1.5rem] shadow-xl overflow-hidden mt-8">
     <div class="p-6 border-b border-[#2a2a36] flex justify-between items-center">
-      <h3 class="text-lg font-bold text-white">Recently Hired</h3>
-      <button class="text-sm text-blue-500 hover:text-blue-400 font-medium">View All</button>
+      <h3 class="text-lg font-bold text-white">All Employees</h3>
+      <button
+        (click)="showAllResult = !showAllResult"
+        class="cursor-pointer text-sm text-blue-500 hover:text-blue-400 font-medium"
+      >
+        {{ showAllResult ? 'Show Less' : 'View All' }}
+      </button>
     </div>
 
     <div class="overflow-x-auto">
@@ -91,8 +96,18 @@
           </tr>
 
           <!-- Actual Data from API -->
-          <tr *ngFor="let emp of recentEmployees" class="hover:bg-[#1c1c25] transition-colors">
-            <td class="p-4 text-white font-medium">{{ emp.name }}</td>
+          <tr
+            *ngFor="let emp of showAllResult ? recentEmployees : topFiveEmployees"
+            class="hover:bg-[#1c1c25] transition-colors"
+          >
+            <td class="p-4 text-white font-medium">
+              <div
+                (click)="openViewModal(emp)"
+                class="cursor-pointer hover:text-blue-400 transition-colors"
+              >
+                {{ emp.name }}
+              </div>
+            </td>
             <td class="p-4 text-gray-400 text-sm">{{ emp.email }}</td>
             <td class="p-4">
               <!-- Dynamically colors the badge if they are Admin vs Employee -->
@@ -143,3 +158,53 @@
   (refresh)="ngOnInit()"
 >
 </app-edit-employee-modal>
+
+<!-- The View Modal Overlay -->
+
+<div
+  *ngIf="isViewModalOpen"
+  class="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+>
+  <!-- The Modal Card -->
+
+  <div class="bg-[#15151c] border border-[#2a2a36] rounded-2xl w-[400px] p-8 relative shadow-2xl">
+    <!-- Close Button -->
+
+    <button
+      (click)="isViewModalOpen = false"
+      class="absolute top-4 right-4 text-gray-400 hover:text-white font-bold text-xl"
+    >
+      &times;
+    </button>
+
+    <!-- Content -->
+    <h2 class="text-2xl font-bold text-white mb-2">{{ selectedEmployeeForView?.name }}</h2>
+    <p class="text-blue-400 font-medium mb-6">
+      {{ selectedEmployeeForView?.roleName }} - {{ selectedEmployeeForView?.departmentName }}
+    </p>
+
+    <!-- Details List -->
+
+    <div class="space-y-4 text-left">
+      <div class="flex justify-between border-b border-[#2a2a36] pb-2">
+        <span class="text-gray-400">Email:</span>
+        <span class="text-white">{{ selectedEmployeeForView?.email }}</span>
+      </div>
+
+      <div class="flex justify-between border-b border-[#2a2a36] pb-2">
+        <span class="text-gray-400">Phone:</span>
+        <span class="text-white">{{ selectedEmployeeForView?.phoneNumber }}</span>
+      </div>
+
+      <div class="flex justify-between border-b border-[#2a2a36] pb-2">
+        <span class="text-gray-400">Bank Acct:</span>
+        <span class="text-white">{{ selectedEmployeeForView?.bankAccountNumber }}</span>
+      </div>
+
+      <div class="flex justify-between pb-2">
+        <span class="text-gray-400">Joined:</span>
+        <span class="text-white">{{ selectedEmployeeForView?.dateOfJoining | date }}</span>
+      </div>
+    </div>
+  </div>
+</div>

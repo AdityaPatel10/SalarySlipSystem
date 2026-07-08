@@ -22,4 +22,8 @@ export class SalarySlip {
   getEmployeeHistory(employeeGlobalId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/GetEmployeeHistory/${employeeGlobalId}`);
   }
+
+  getTotalPayroll():Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/GetTotalPayroll`);
+  }
 }

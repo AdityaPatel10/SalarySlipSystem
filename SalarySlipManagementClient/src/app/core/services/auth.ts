@@ -13,4 +13,16 @@ export class Auth {
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials);
   }
+
+  requestOtp(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/request-otp`, data);
+  }
+
+  verifyOtp(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/verify-otp`, data);
+  }
+
+  resetPassword(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, data);
+  }
 }

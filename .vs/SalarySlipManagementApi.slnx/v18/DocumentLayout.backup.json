@@ -3,6 +3,38 @@
   "WorkspaceRootPath": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\repositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\repositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\dtos\\authdtos\\requestotpdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\dtos\\authdtos\\requestotpdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|c:\\users\\adity\\desktop\\projects\\salaryslipsystem\\salaryslipmanagementapi\\dtos\\authdtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A294765-7538-66D8-205A-51549EFC7064}|SalarySlipManagementApi\\SalarySlipManagementApi.csproj|solutionrelative:salaryslipmanagementapi\\dtos\\authdtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.Departments.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
@@ -37,7 +69,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,7 +77,111 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Program.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\Program.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Program.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\Program.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADQAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T11:15:25.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Repositories\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\Repositories\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Repositories\\UnitOfWork.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\Repositories\\UnitOfWork.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAywCMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T10:10:30.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\Repositories\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T10:09:55.652Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Repositories\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\Repositories\\IGenericRepository.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Repositories\\IGenericRepository.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\Repositories\\IGenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T10:09:57.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Services\\AuthService.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\Services\\AuthService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwGoAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T09:58:25.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowC0AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T09:57:49.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RequestOtpDto.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\DTOs\\AuthDTOs\\RequestOtpDto.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\DTOs\\AuthDTOs\\RequestOtpDto.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\DTOs\\AuthDTOs\\RequestOtpDto.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\DTOs\\AuthDTOs\\RequestOtpDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T09:57:43.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ResetPasswordDto.cs",
+              "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\DTOs\\AuthDTOs\\ResetPasswordDto.cs",
+              "RelativeDocumentMoniker": "SalarySlipManagementApi\\DTOs\\AuthDTOs\\ResetPasswordDto.cs",
+              "ToolTip": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\DTOs\\AuthDTOs\\ResetPasswordDto.cs",
+              "RelativeToolTip": "SalarySlipManagementApi\\DTOs\\AuthDTOs\\ResetPasswordDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T09:57:35.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "RolesController.cs",
               "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Controllers\\RolesController.cs",
               "RelativeDocumentMoniker": "SalarySlipManagementApi\\Controllers\\RolesController.cs",
@@ -58,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "DepartmentsController.cs",
               "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Controllers\\DepartmentsController.cs",
               "RelativeDocumentMoniker": "SalarySlipManagementApi\\Controllers\\DepartmentsController.cs",
@@ -71,7 +207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "EmployeesController.cs",
               "DocumentMoniker": "C:\\Users\\adity\\Desktop\\Projects\\SalarySlipSystem\\SalarySlipManagementApi\\Controllers\\EmployeesController.cs",
               "RelativeDocumentMoniker": "SalarySlipManagementApi\\Controllers\\EmployeesController.cs",
@@ -84,53 +220,48 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "dbo.Employees [Data]",
+              "DocumentIndex": 12,
+              "Title": "dbo.Employees.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.Employees.sql",
-              "ToolTip": "dbo.Employees [Data]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.Employees.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-07-08T05:40:08.45Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-08T05:40:08.45Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "dbo.MonthlySalarySlips [Data]",
+              "DocumentIndex": 15,
+              "Title": "dbo.MonthlySalarySlips.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.MonthlySalarySlips.sql",
-              "ToolTip": "dbo.MonthlySalarySlips [Data]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.MonthlySalarySlips.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-07-08T05:40:06.404Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-08T05:40:06.404Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "dbo.Roles [Data]",
+              "DocumentIndex": 14,
+              "Title": "dbo.Roles.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.Roles.sql",
-              "ToolTip": "dbo.Roles [Data]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.Roles.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-07-08T05:40:03.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-08T05:40:03.982Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "dbo.SalaryStructures [Data]",
+              "DocumentIndex": 13,
+              "Title": "dbo.SalaryStructures.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.SalaryStructures.sql",
-              "ToolTip": "dbo.SalaryStructures [Data]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.SalaryStructures.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-07-08T05:39:33.671Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-08T05:39:33.671Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "dbo.Departments [Data]",
+              "DocumentIndex": 8,
+              "Title": "dbo.Departments.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.Departments.sql",
-              "ToolTip": "dbo.Departments [Data]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SalarySlipDB/True/SqlTable/dbo.Departments.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-07-08T05:39:17.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-08T05:39:17.18Z"
             }
           ]
         }

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5045/api',
+  apiUrl: 'https://profane-tamer-encourage.ngrok-free.dev/api',
 };

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://profane-tamer-encourage.ngrok-free.dev/api',
+  apiUrl: 'https://51636ee06fdcb9.lhr.life/api',
 };

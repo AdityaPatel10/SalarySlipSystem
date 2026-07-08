@@ -86,5 +86,21 @@ namespace SalarySlipManagementApi.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("GetTotalPayroll")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> GetTotalPayroll()
+        {
+            var currentMonth = DateTime.UtcNow.Month;
+            var currentYear = DateTime.UtcNow.Year;
+
+            var slips = await _unitOfWork.MonthlySalarySlips.FindAsync(s =>
+                s.Month == currentMonth && s.Year == currentYear
+            );
+
+            var totalPayroll = slips.Sum(s => s.NetSalary);
+
+            return Ok(new { total = totalPayroll });
+        }
     }
 }

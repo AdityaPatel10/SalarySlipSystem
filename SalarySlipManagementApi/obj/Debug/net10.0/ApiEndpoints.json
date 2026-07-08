@@ -252,6 +252,22 @@
   },
   {
     "ContainingType": "SalarySlipManagementApi.Controllers.EmployeesController",
+    "Method": "SelfUpdate",
+    "RelativePath": "api/Employees/settings",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SalarySlipManagementApi.DTOs.EmployeeDTOs.EmployeeSelfUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SalarySlipManagementApi.Controllers.EmployeesController",
     "Method": "UpdateEmployee",
     "RelativePath": "api/Employees/UpdateEmployee/{globalId}",
     "HttpMethod": "PUT",
@@ -311,6 +327,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SalarySlipManagementApi.Controllers.MonthlySalarySlipsController",
+    "Method": "GetTotalPayroll",
+    "RelativePath": "api/MonthlySalarySlips/GetTotalPayroll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

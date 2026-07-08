@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalarySlipManagementApi.DTOs;
@@ -9,6 +10,7 @@ namespace SalarySlipManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -19,6 +21,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpGet("GetAllDepartments")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<DepartmentResponseDto>>> GetAllDepartments()
         {
             var departsments = await _unitOfWork.Departments.GetAllAsync();
@@ -32,6 +35,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpGet("GetDepartmentById/{globalId}")]
+        [Authorize]
         public async Task<ActionResult<DepartmentResponseDto>> GetDepartmentById(Guid globalId)
         {
             var departments = await _unitOfWork.Departments.FindAsync(d => d.GlobalId == globalId);
@@ -51,6 +55,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpPost("CreateNewDepartment")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateNewDepartment([FromBody] DepartmentCreateDto dto)
         {
             var newDepartment = new Department { Name = dto.DepartmentName };
@@ -68,6 +73,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpPut("UpdateDepartment/{globalId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateDepartment(
             Guid globalId,
             [FromBody] DepartmentUpdateDto dto
@@ -89,6 +95,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpDelete("DeleteDepartment/{globalId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteDepartment(Guid globalId)
         {
             var departments = await _unitOfWork.Departments.FindAsync(d => d.GlobalId == globalId);

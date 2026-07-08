@@ -510,6 +510,38 @@
         }
       }
     },
+    "/api/Employees/settings": {
+      "put": {
+        "tags": [
+          "Employees"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeSelfUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeSelfUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeSelfUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/MonthlySalarySlips/GenerateSalarySlip": {
       "post": {
         "tags": [
@@ -574,6 +606,18 @@
               "format": "uuid"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlySalarySlips/GetTotalPayroll": {
+      "get": {
+        "tags": [
+          "MonthlySalarySlips"
         ],
         "responses": {
           "200": {
@@ -1070,6 +1114,41 @@
           "roleGlobalId": {
             "type": "string",
             "format": "uuid"
+          }
+        }
+      },
+      "EmployeeSelfUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "bankAccountNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "phoneNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "newPassword": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },

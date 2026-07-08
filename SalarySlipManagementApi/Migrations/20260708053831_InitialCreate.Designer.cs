@@ -12,7 +12,7 @@ using SalarySlipManagementApi.Data;
 namespace SalarySlipManagementApi.Migrations
 {
     [DbContext(typeof(SalarySlipDbContext))]
-    [Migration("20260702064105_InitialCreate")]
+    [Migration("20260708053831_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -91,6 +91,9 @@ namespace SalarySlipManagementApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<DateTime?>("OtpEpiry")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -99,6 +102,9 @@ namespace SalarySlipManagementApi.Migrations
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("RestOtp")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");

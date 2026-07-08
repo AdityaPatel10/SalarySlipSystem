@@ -1,4 +1,5 @@
-﻿using SalarySlipManagementApi.DTOs.SalarySlipDTOs;
+﻿using Microsoft.IdentityModel.Tokens.Experimental;
+using SalarySlipManagementApi.DTOs.SalarySlipDTOs;
 using SalarySlipManagementApi.Entities;
 using SalarySlipManagementApi.Repositories;
 
@@ -29,6 +30,27 @@ namespace SalarySlipManagementApi.Services
             if (employee.SalaryStructure == null)
             {
                 throw new Exception("No salary structure found for the employee.");
+            }
+
+            var requestDate = new DateTime(request.Year, request.Month, 1);
+            var currentDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
+
+            if (requestDate > currentDate)
+            {
+                throw new Exception(
+                    "Access Denied: You cannot generate a Salary slip for future month."
+                );
+            }
+
+            var existingSlips = await _unitOfWork.MonthlySalarySlips.FindAsync(s =>
+                s.EmployeeId == employee.Id && s.Month == request.Month && s.Year == request.Year
+            );
+
+            if (existingSlips.Any())
+            {
+                throw new Exception(
+                    $"Duplicate Error: A salary slip already exists for {employee.Name} for {request.Month}/{request.Year}."
+                );
             }
 
             decimal basic = employee.SalaryStructure.BasicSalary;

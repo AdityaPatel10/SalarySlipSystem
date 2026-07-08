@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalarySlipManagementApi.Data;
@@ -9,6 +10,7 @@ namespace SalarySlipManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RolesController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -19,6 +21,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpGet("GetAllRoles")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<RoleResponseDto>>> GetAllRoles()
         {
             var roles = await _unitOfWork.Roles.GetAllAsync();
@@ -32,6 +35,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpGet("GetRoleById/{globalId}")]
+        [Authorize]
         public async Task<ActionResult<RoleResponseDto>> GetRoleById(Guid globalId)
         {
             var roles = await _unitOfWork.Roles.FindAsync(r => r.GlobalId == globalId);
@@ -47,6 +51,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpPost("CreateNewRole")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateNewRole([FromBody] RoleCreateDto dto)
         {
             var newRole = new Role { Name = dto.RoleName };
@@ -58,6 +63,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpPut("UpdateRole/{globalId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateRole(Guid globalId, [FromBody] RoleUpdateDto dto)
         {
             var roles = await _unitOfWork.Roles.FindAsync(r => r.GlobalId == globalId);
@@ -77,6 +83,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpDelete("DeleteRole/{globalId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteRole(Guid globalId)
         {
             var roles = await _unitOfWork.Roles.FindAsync(r => r.GlobalId == globalId);

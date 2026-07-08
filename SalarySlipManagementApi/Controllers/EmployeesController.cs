@@ -122,7 +122,7 @@ namespace SalarySlipManagementApi.Controllers
         }
 
         [HttpPut("UpdateEmployee/{globalId}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateEmployee(
             Guid globalId,
             [FromBody] EmployeeUpdateDto dto
@@ -185,6 +185,51 @@ namespace SalarySlipManagementApi.Controllers
             await _unitOfWork.CompleteAsync();
 
             return Ok("Employee deleted successfully!");
+        }
+
+        [HttpPut("settings")]
+        [Authorize]
+        public async Task<IActionResult> SelfUpdate([FromBody] EmployeeSelfUpdateDto request)
+        {
+            try
+            {
+                var userIdClaim = User.Claims.FirstOrDefault(c =>
+                    c.Type == ClaimTypes.NameIdentifier
+                );
+                if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out Guid globalId))
+                {
+                    return Unauthorized(new { message = "Invalid token claims" });
+                }
+                var employees = await _unitOfWork.Employees.FindAsync(e => e.GlobalId == globalId);
+                var employee = employees.FirstOrDefault();
+
+                if (employee == null)
+                    return NotFound("Employee not found");
+
+                if (!string.IsNullOrWhiteSpace(request.Name))
+                    employee.Name = request.Name;
+
+                if (!string.IsNullOrWhiteSpace(request.Email))
+                    employee.Email = request.Email;
+
+                if (!string.IsNullOrWhiteSpace(request.BankAccountNumber))
+                    employee.BankAccountNumber = request.BankAccountNumber;
+
+                if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
+                    employee.PhoneNumber = request.PhoneNumber;
+
+                if (!string.IsNullOrWhiteSpace(request.NewPassword))
+                    employee.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+
+                _unitOfWork.Employees.Update(employee);
+                await _unitOfWork.CompleteAsync();
+
+                return Ok(new { Message = "Profile updated successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

@@ -13,13 +13,14 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   token = localStorage.getItem('jwt_token');
 
-  if (token) {
-    req = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  }
+  req = req.clone({
+    setHeaders: token ? {
+      'ngrok-skip-browser-warning': '69420',
+      Authorization: `Bearer ${token}`,
+    } : {
+      'ngrok-skip-browser-warning': '69420',
+    },
+  });
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
